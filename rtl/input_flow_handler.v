@@ -1,4 +1,6 @@
-(* LUT_MAP="yes" *)
+// Xilinx Only
+// TODO ifdef to add  it only on Xilinx
+// (* LUT_MAP="yes" *)
 
 module input_flow_handler
 	(

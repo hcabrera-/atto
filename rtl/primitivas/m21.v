@@ -1,4 +1,6 @@
-(* LUT_MAP="yes" *)
+// Xilinx Only 
+// TODO ifdef to enable inclusion
+// (* LUT_MAP="yes" *)
 
 module m21 (
   input   wire sel,
