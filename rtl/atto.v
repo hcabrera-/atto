@@ -1,4 +1,4 @@
-module router #(parameter X_LOCAL = 2, parameter Y_LOCAL = 2)
+module atto #(parameter X_LOCAL = 2, parameter Y_LOCAL = 2)
   (
     input   wire clka,
     input   wire rsta,
