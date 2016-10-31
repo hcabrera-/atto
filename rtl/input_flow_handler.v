@@ -14,16 +14,16 @@ module input_flow_handler
 	);
 
 
-// Pipe Enable Signal
-wire 		pipe_enable;
-assign 	pipe_enable = ((diff_pair_p ^ diff_pair_p_reg) & (diff_pair_n ^ diff_pair_n_reg)) ? 1'b1 : 1'b0;
-assign	pipe_en = pipe_enable;
+//---- Signal declaration
+    // Memory Element
+        reg	diff_pair_p_reg = 1'b1;
+        reg	diff_pair_n_reg = 1'b0;
+
+    // Pipe Enable Signal
+        wire	pipe_enable;
 
 
-// Memory Element
-reg	diff_pair_p_reg = 1'b1;
-reg	diff_pair_n_reg = 1'b0;
-
+// Differential par handler
 always @(posedge clka)
 	begin
 		if (rsta)
@@ -40,6 +40,11 @@ always @(posedge clka)
 					end
 			end
 	end
+
+
+// Pipe Enable Signal
+    assign 	pipe_enable = ((diff_pair_p ^ diff_pair_p_reg) & (diff_pair_n ^ diff_pair_n_reg)) ? 1'b1 : 1'b0;
+    assign	pipe_en     = pipe_enable;
 
 
 endmodule// flow_handler

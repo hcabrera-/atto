@@ -14,24 +14,19 @@ module inport #(parameter X_LOCAL = 2, parameter Y_LOCAL = 2)
       output  wire [47:0] packet_dout
   );
 
+//---- Signal declaration
+    // Port flow_handler
+        wire  request_unreg;
 
-// Segmentation Registers
-reg [47:0]  input_pipe_reg = 48'b0;
+    // Segmentation Registers
+        reg [47:0]  input_pipe_reg = 48'b0;
 
-always @(posedge clka)
-  if (request_unreg)
-    input_pipe_reg <= channel_din;
+    // Register for arbitration request
+        reg request_reg;
 
-// Register for arbitration request
-reg request_reg;
-
-always @(posedge clka)
-  request_reg <= request_unreg;
 
 
 // Port flow_handler
-wire  request_unreg;
-
 input_flow_handler inport_flow_handler
   	(
   		.clka       (clka),
@@ -51,5 +46,19 @@ assign request_dout = request_reg;
 // Derived outputs
 assign x_hit_dout = (input_pipe_reg[47:44] == X_LOCAL) ? 1'b1 : 1'b0;
 assign y_hit_dout = (input_pipe_reg[43:40] == Y_LOCAL) ? 1'b1 : 1'b0;
+
+
+
+//---- Memory Elements
+    // Segmentation Registers
+        always @(posedge clka)
+            if (request_unreg)
+                input_pipe_reg <= channel_din;
+
+    // Register for arbitration request
+        always @(posedge clka)
+            request_reg <= request_unreg;
+
+
 
 endmodule
