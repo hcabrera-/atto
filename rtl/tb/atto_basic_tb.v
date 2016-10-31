@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module router_basic_tb();
+module atto_basic_tb();
 
 
 reg clka;
